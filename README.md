@@ -12,6 +12,8 @@ Dado el código base de los Árboles con sus respectivos recorridos (pre, in y p
 3. Cambiar los métodos pre y post recorrido, el recorrido inorden es imposible con Árboles n-arios, elimínalo.
 4. Implementa los siguientes métodos en Árbol (y los necesarios en Nodo):
    
+Métodos:
+
 	Nodo buscarNodo(String valor);
 Busca a lo largo del recorrido del Árbol si existe un nodo con ese valor. Si lo encuentra, lo devuelve (el nodo en sí). Si no lo encuentra en todo el Árbol devuelve null.
 
@@ -46,5 +48,5 @@ Este método mostrará el path de cada uno de los nodos siguiendo un recorrido P
 
 ~/ternera/cuatro/
 
-
-![Árbol de ejemplo](/docs/arbolnario.png "Ejemplos basados en esta imagen")
+Los ejemplos están basados en el árbol siguiente:
+![Árbol de ejemplo](/docs/arbolnario.png "Ejemplos basados en este árbol")
