@@ -19,4 +19,27 @@ public class Arbol {
 	public void setRaiz(Nodo raiz) {
 		this.raiz = raiz;
 	}
+	
+	//MÉTODOS
+	public void preOrden() {
+		this.raiz.preOrden(raiz);
+	}
+	
+	public void postOrden() {
+		this.raiz.postOrden(raiz);
+	}
+	
+	public Nodo buscar(String valor) {
+		return this.raiz.buscar(valor);
+	}
+	
+	public int profundidad(String valor) {
+		return this.raiz.profundidad(valor, 0);
+	}
+	
+	//TO STRING
+	@Override
+	public String toString() {
+		return "Arbol [raiz=" + raiz + "]";
+	}
 }

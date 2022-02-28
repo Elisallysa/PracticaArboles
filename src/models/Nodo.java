@@ -36,8 +36,74 @@ public class Nodo {
 	}
 	
 	//MÉTODOS
+	public boolean esHoja() {
+		return this.izq == null && this.dcha == null;
+	}
+
+	public boolean tieneHijosIzq(Nodo n) {
+		return n.izq != null;
+	}
+
+	public boolean tieneHijosDcha(Nodo n) {
+		return n.dcha != null;
+	}
+
 	public void preOrden(Nodo n) {
-		
+		System.out.print(n.valor + ",");
+		if (tieneHijosIzq(n)) {
+			preOrden(n.izq);
+		}
+		if (tieneHijosDcha(n)) {
+			preOrden(n.dcha);
+		}
+	}
+
+	public void postOrden(Nodo n) {
+
+		if (tieneHijosIzq(n)) {
+			postOrden(n.izq);
+		}
+		if (tieneHijosDcha(n)) {
+			postOrden(n.dcha);
+		}
+		System.out.print(n.valor + ",");
+	}
+
+	public Nodo buscar(String valor) {
+		if (this.valor.equals(valor)) {
+			return this;
+		}
+		if (tieneHijosIzq(this)) {
+			var n = this.izq.buscar(valor);
+			if (n != null)
+				return n;
+		}
+		if (tieneHijosDcha(this)) {
+			var n = this.dcha.buscar(valor);
+			if (n != null)
+				return n;
+		}
+		return null;
+	}
+
+	public int profundidad(String valor, int prof) {
+		//Buscar si yo soy ese nodo
+		if (this.valor.equals(valor)) {
+			return prof;
+		}
+		//Si tengo hijos por la izqda busco en prof por la izq
+		//incrementando la prof.
+		if (tieneHijosIzq(this)) {
+			var n = this.izq.profundidad(valor, ++prof);
+			if (n != -1) return n; //encontrado devuelvo prof actual
+			else --prof; //no lo he encontrado resto prof
+		}
+		if (tieneHijosDcha(this)) {
+			var n = this.dcha.profundidad(valor, ++prof);
+			if (n != -1) return n;
+			else --prof;
+		}
+		return -1;
 	}
 	
 	//TO STRING
