@@ -5,108 +5,134 @@ import java.util.List;
 
 public class Nodo {
 
-	//ATRIBUTOS
+	// ATRIBUTOS
 	private String value;
 	private List<Nodo> children;
-	
-	//CONSTRUCTOR
+
+	// CONSTRUCTOR
 	public Nodo(String value) {
 		super();
 		this.value = value;
 	}
-	
+
 	public Nodo(String value, List<Nodo> children) {
 		super();
 		this.value = value;
 		this.children = new LinkedList<Nodo>();
 	}
-	
-	//GETTERS & SETTERS
+
+	// GETTERS & SETTERS
 	public String getValue() {
 		return value;
 	}
+
 	public void setValue(String value) {
 		this.value = value;
 	}
+
 	public List<Nodo> getChildren() {
 		return children;
 	}
+
 	public void setChildren(LinkedList<Nodo> children) {
 		this.children = children;
 	}
-	
-	//MÉTODOS
-	public boolean esHoja() {
-		return this.izq == null && this.dcha == null;
+
+	// MÉTODOS
+	public boolean isLeave() {
+		return this.children.isEmpty();
 	}
 
-	public boolean tieneHijosIzq(Nodo n) {
-		return n.izq != null;
-	}
-
-	public boolean tieneHijosDcha(Nodo n) {
-		return n.dcha != null;
+	public boolean hasChildren() {
+		return !this.children.isEmpty();
 	}
 
 	public void preOrden(Nodo n) {
-		System.out.print(n.valor + ",");
-		if (tieneHijosIzq(n)) {
-			preOrden(n.izq);
-		}
-		if (tieneHijosDcha(n)) {
-			preOrden(n.dcha);
+		System.out.print(n.value + ",");
+		if (n.hasChildren()) {
+			for (int i = 0; i < n.children.size(); i++) {
+				preOrden(n.children.get(i));
+			}
 		}
 	}
 
 	public void postOrden(Nodo n) {
 
-		if (tieneHijosIzq(n)) {
-			postOrden(n.izq);
+		if (n.hasChildren()) {
+			for (int i = 0; i < n.children.size(); i++) {
+				postOrden(n.children.get(i));
+			}
 		}
-		if (tieneHijosDcha(n)) {
-			postOrden(n.dcha);
-		}
-		System.out.print(n.valor + ",");
+		System.out.print(n.value + ",");
 	}
 
-	public Nodo buscar(String valor) {
-		if (this.valor.equals(valor)) {
+	/**
+	 * Busca a lo largo del recorrido del árbol si existe un nodo con ese valor. Si
+	 * lo encuentra, lo devuelve (el nodo en sí). Si no lo encuentra en todo el
+	 * árbol devuelve null.
+	 * 
+	 * @param valor - Cadena de caracteres que almacena el Nodo a buscar
+	 * @return Nodo que contiene el valor que se busca; null si no se encuentra el
+	 *         Nodo con el valor que se busca
+	 */
+	public Nodo buscarNodo(String valor) {
+		if (this.value.equals(valor)) {
 			return this;
 		}
-		if (tieneHijosIzq(this)) {
-			var n = this.izq.buscar(valor);
-			if (n != null)
-				return n;
+		if (this.hasChildren()) {
+			for (int i = 0; i < this.children.size(); i++) {
+				var n = this.children.get(i).buscarNodo(valor);
+				if (n != null)
+					return n;
+			}
+
 		}
-		if (tieneHijosDcha(this)) {
-			var n = this.dcha.buscar(valor);
-			if (n != null)
-				return n;
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param padre
+	 * @param valor
+	 * @return
+	 */
+	public Nodo insertarNodo(Nodo padre, String valor) {
+		if (this.equals(padre)) {
+			padre.children.add(new Nodo (valor, null));
+		}
+		if (!this.equals(padre)) {
+			for (int i = 0; i < this.children.size(); i++) {
+				this.children.get(i).insertarNodo(padre, valor);
+			}
 		}
 		return null;
 	}
 
-	public int profundidad(String valor, int prof) {
-		//Buscar si yo soy ese nodo
-		if (this.valor.equals(valor)) {
-			return prof;
-		}
-		//Si tengo hijos por la izqda busco en prof por la izq
-		//incrementando la prof.
-		if (tieneHijosIzq(this)) {
-			var n = this.izq.profundidad(valor, ++prof);
-			if (n != -1) return n; //encontrado devuelvo prof actual
-			else --prof; //no lo he encontrado resto prof
-		}
-		if (tieneHijosDcha(this)) {
-			var n = this.dcha.profundidad(valor, ++prof);
-			if (n != -1) return n;
-			else --prof;
-		}
-		return -1;
+	public String path(String valor) {
+		return valor;
 	}
 	
-	//TO STRING
+//	public int profundidad(String valor, int prof) {
+//		//Buscar si yo soy ese nodo
+//		if (this.valor.equals(valor)) {
+//			return prof;
+//		}
+//		//Si tengo hijos por la izqda busco en prof por la izq
+//		//incrementando la prof.
+//		if (tieneHijosIzq(this)) {
+//			var n = this.izq.profundidad(valor, ++prof);
+//			if (n != -1) return n; //encontrado devuelvo prof actual
+//			else --prof; //no lo he encontrado resto prof
+//		}
+//		if (tieneHijosDcha(this)) {
+//			var n = this.dcha.profundidad(valor, ++prof);
+//			if (n != -1) return n;
+//			else --prof;
+//		}
+//		return -1;
+//	}
+
+	// TO STRING
 	@Override
 	public String toString() {
 		return "Nodo [value=" + value + ", children=" + children + "]";

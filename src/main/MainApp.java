@@ -2,6 +2,7 @@ package main;
 
 import java.util.LinkedList;
 
+import models.Arbol;
 import models.Nodo;
 
 
@@ -28,6 +29,8 @@ public class MainApp {
 	 *   10
 	 */
 	root.getChildren().add(n2);
+	root.getChildren().add(n3);
+	root.getChildren().add(n4);
 	n2.getChildren().add(n5);
 	n2.getChildren().add(n6);
 	n3.getChildren().add(n7);
@@ -35,6 +38,15 @@ public class MainApp {
 	n6.getChildren().add(n9);
 	n9.getChildren().add(n10);
 	
-		
+	Arbol tree = new Arbol(root);
+	
+	tree.preOrden();
+	tree.postOrden();
+	System.out.println(tree.buscarNodo("9"));
+	System.out.println(tree.buscarNodo("12"));
+	
+	tree.insertarNodo(n3, "nuevo");
+	System.out.println("Después de insertar un nuevo nodo hijo 'nuevo' en el nodo n3");
+	tree.preOrden();
 	}
 	}
