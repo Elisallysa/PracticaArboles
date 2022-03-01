@@ -1,10 +1,10 @@
-# PracticaArboles
-Exercise aimed at understanding and exploring n-ary data structure
+# 🌳 PracticaArboles 🌳
+ Exercise aimed at understanding and exploring n-ary data structure
 
-## Descripción
+## 🌲 Descripción 🌲
 Ejercicio propuesto en la clase de Programación (en Java) del 1er curso del CFGS Desarrollo de Aplicaciones Multiplataforma para explorar el funcionamiento de las estructuras de datos en Árboles n-arios.
 
-## Instrucciones del ejercicio
+## 🌲 Instrucciones del ejercicio 🌲
 Dado el código base de los Árboles con sus respectivos recorridos (pre, in y post). Se pide:
 
 1. Cambiar el valor que almacenan los nodos a String.
