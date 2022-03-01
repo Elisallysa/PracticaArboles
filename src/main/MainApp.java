@@ -48,5 +48,7 @@ public class MainApp {
 	tree.insertarNodo(n3, "nuevo");
 	System.out.println("Después de insertar un nuevo nodo hijo 'nuevo' en el nodo n3");
 	tree.preOrden();
+	String camino = tree.path("9");
+	System.out.println(camino);
 	}
 	}

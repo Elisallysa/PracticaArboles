@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -108,8 +110,22 @@ public class Nodo {
 		return null;
 	}
 
-	public String path(String valor) {
-		return valor;
+	public ArrayList<String> path(String valor, ArrayList<String> path) {
+		
+		if (this.hasChildren()) {
+			for (int i = 0; i < this.children.size(); i++) {
+				if (this.children.get(i).buscarNodo(valor) != null && !this.children.get(i).value.equals(valor)) {
+					this.children.get(i).path(valor, path);
+					path.add(this.value);
+				} 
+				if (this.children.get(i).value.equals(valor)) {
+					path.add(this.children.get(i).value);
+					path.add(this.value);
+				}
+				
+			}
+			
+		} return path;
 	}
 	
 //	public int profundidad(String valor, int prof) {

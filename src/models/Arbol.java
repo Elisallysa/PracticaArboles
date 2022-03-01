@@ -1,5 +1,8 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Arbol {
 
 	// ATRIBUTOS
@@ -31,6 +34,11 @@ public class Arbol {
 		System.out.println("");
 	}
 
+	/**
+	 * 
+	 * @param valor
+	 * @return
+	 */
 	public Nodo buscarNodo(String valor) {
 		return this.raiz.buscarNodo(valor);
 	}
@@ -49,7 +57,14 @@ public class Arbol {
 	}
 	
 	public String path(String valor) {
-		return this.raiz.path(valor);
+		ArrayList<String> emptyPath = new ArrayList<String>();
+		ArrayList<String> path = new ArrayList<String>();
+		if (this.raiz.buscarNodo(valor) != null) {
+			path = this.raiz.path(valor, emptyPath);
+			Collections.reverse(path);
+			return path.toString();
+		}else
+			return ("Este nodo no se encuentra en el árbol.");
 	}
 
 //	public int profundidad(String valor) {
